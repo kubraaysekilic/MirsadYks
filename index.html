@@ -657,7 +657,7 @@
             const pagination = document.querySelector('.pagination');
             
             if (type === 'matematik') {
-                quizArea.innerHTML = '<div class="question-card" style="text-align:center; padding: 50px;"><h2>Çok yakında... ⏳</h2><p>Matematik soruları henüz eklenmedi, beklemede kal ✨</p></div>';
+                quizArea.innerHTML = '<div class="question-card" style="text-align:center; padding: 50px;"><h2>Çok yakında...</h2></div>';
                 pagination.style.display = 'none';
                 return;
             } else {
@@ -744,7 +744,7 @@
                 feedback.innerHTML = `<b>Harikasın Doğru Cevap ✨</b><br><p>${q.explanation}</p>`;
             } else {
                 feedback.className = 'feedback wrong';
-                feedback.innerHTML = `<b>Olsun bir dahaki sefere 🌸</b><br>Doğru Şık: ${String.fromCharCode(65 + q.answer)}<br><p>${q.explanation}</p>`;
+                feedback.innerHTML = `<b>Canın sağ olsun, bir dahaki sefere 🌸</b><br>Doğru Şık: ${String.fromCharCode(65 + q.answer)}<br><p>${q.explanation}</p>`;
             }
         }
 
