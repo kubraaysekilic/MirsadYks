@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf Mirsad Aktaş - Sınav Hazırlık</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pudra-pink: #fce4ec;
+            --soft-purple: #f3e5f5;
+            --fairy-green: #e8f5e9;
+            --deep-purple: #7b1fa2;
+            --accent-pink: #ff80ab;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+        .overlay {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 4px solid var(--pudra-pink);
+            position: relative;
+            margin-top: 20px;
+        }
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--deep-purple);
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .tab-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            background: var(--soft-purple);
+            color: var(--deep-purple);
+            font-size: 1rem;
+        }
+        .tab-btn.active {
+            background: var(--accent-pink);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 128, 171, 0.4);
+        }
+        .question-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid var(--pudra-pink);
+            box-shadow: inset 0 0 15px rgba(252, 228, 236, 0.5);
+        }
+        .question-meta {
+            color: var(--accent-pink);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .question-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 30px;
+        }
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+        .option-btn {
+            background: var(--fairy-green);
+            border: 2px solid transparent;
+            padding: 18px;
+            border-radius: 20px;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            color: #2e7d32;
+        }
+        .option-btn:hover {
+            background: #c8e6c9;
+            transform: translateX(5px);
+        }
+        .option-btn.selected {
+            border-color: var(--accent-pink);
+            background: #fce4ec;
+            color: var(--deep-purple);
+        }
+        .actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .btn-solve { background: var(--deep-purple); color: white; }
+        .btn-review { background: var(--pudra-pink); color: var(--deep-purple); }
+        .btn:hover { transform: scale(1.05); opacity: 0.95; }
+        
+        .feedback {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 20px;
+            display: none;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        .feedback.correct { background: #e8f5e9; border: 2px solid #4caf50; color: #2e7d32; }
+        .feedback.wrong { background: #ffebee; border: 2px solid #ef5350; color: #c62828; }
+        
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            width: 100%;
+            max-width: 800px;
+        }
+        .page-info { 
+            color: var(--deep-purple); 
+            font-weight: 600; 
+            background: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .container { padding: 25px; border-radius: 30px; }
+            h1 { font-size: 2rem; }
+            .btn { padding: 12px 25px; font-size: 1rem; }
+            .question-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="container">
+            <h1>Yusuf Mirsad'ın Hazırlık Köşesi 🌿</h1>
+            
+            <div class="nav-tabs">
+                <button class="tab-btn active" id="tab-all" onclick="filterType('all')">Hepsi ✨</button>
+                <button class="tab-btn" id="tab-paragraf" onclick="filterType('paragraf')">Paragraf 📖</button>
+                <button class="tab-btn" id="tab-matematik" onclick="filterType('matematik')">Matematik 📐</button>
+            </div>
+
+            <div id="quiz-area"></div>
+        </div>
+
+        <div class="pagination">
+            <button class="btn btn-review" id="prevBtn" onclick="changeQuestion(-1)">✨ Önceki</button>
+            <span class="page-info" id="pageInfo"></span>
+            <button class="btn btn-review" id="nextBtn" onclick="changeQuestion(1)">Sonraki ✨</button>
+        </div>
+    </div>
+
+    <script>
+        const allQuestions = [{"id": 1, "type": "Paragraf", "text": "1. Benim metinlerimde ev başta olmak üzere mekân duygusu çok önem taşır, yazdığım karakterlerin nerede ve hangi şartlarda yaşadığını daha en baştan bilmem gerekir çünkü çevre, insanın karakterini biçimleme gücüne sahiptir. Özellikle büyük ölçekli yerleşimler, metropoller olumlu ya da olumsuz açıdan büyüleyicidir. Bu tür şehirlerden nefret ederiz veya onlara taparız. Kent olanaklarını sunuyorsa sevgi, sunmuyorsa nefret doğuyor insanda. Aslında ikisi de yanlış çünkü kent denen yerleşim yeri sunidir. Doğal şekilde oluşmamıştır ve insanın doğasına aykırı binlerce ayrıntıya sahiptir. Oysa köyler ve kasabalar zamanla oluşan ve doğal biçimde büyüyen yerler. Buralar insanın doğasıyla da sağlıklı bir ilişkiye sahip. Edebiyat - mekân bu açılardan değer taşır.<br><br><b>Bu parçanın konusu aşağıdakilerden hangisidir?</b>", "options": ["Kent yaşamının zorlukları", "Metropollerin çekiciliği", "Edebî metinlerde mekânın önemi", "Yaşanılan yerin karakter üzerindeki etkisi", "Küçük yerleşim birimlerinin olumlu yönleri"], "answer": 2, "explanation": "Metinde yazarın mekân duygusuna verdiği önem ve mekânın edebiyat/insan üzerindeki etkileri anlatılmaktadır. Ana vurgu edebî metinlerde mekânın önemidir."}, {"id": 2, "type": "Paragraf", "text": "2. Evvela tatlı bir hüzünle konuştuğumuz olur; sonra bolluk, bereket, hasat ayıdır. Ayva sarı, nar kırmızı, armut sulu, üzüm kehribardır. Kavunlar ve incirler iyice ballanmıştır. İpliğe dizilen alışlar sarı kızıl rengiyle kolları, göğüsleri sarmalamaktadır. Lakin bu dağ yemişi alev alev rengiyle o güzel zamanın bitmekte olduğunun da habercisidir. Bir de hikâyeler, kitaplar getirir, bir senenin serencamını. Bir yıldır biriken maceraların, öykülerin anlatılma vaktidir. Havalar azıcık soğumuş, yazdan yabandan, dağdan bayırdan, bağdan bostandan, tatilden, denizden kumdan evine dönen ve köşesine çekilen insanlar için biriktirilmiş hikâyelerin okunma vakti gelmiştir.<br><br><b>Bu parçanın konusu aşağıdakilerden hangisidir?</b>", "options": ["Sonbahar mevsimi", "Doğanın güzel yönleri", "Yaşamdan duyulan sevinç", "Meyvelerin özellikleri", "İnsan doğa ilişkisi"], "answer": 0, "explanation": "Metinde sonbaharın gelişi, meyvelerin olgunlaşması ve bu dönemin hikâye okuma zamanı olduğu vurgulanmaktadır."}, {"id": 3, "type": "Paragraf", "text": "3. Konuşmalarda belki de en önemli noktalardan biri, görünüştür. Görünüşünüzün nasıl olması gerektiğiyle ilgili kaygılarınız varsa önce şu iki soruya odaklanın: 'Görünüşüm iletmek istediğim mesaja uygun mu?' ve 'Kıyafetimde, dinleyicilerin mesajıma odaklanma konusunda dikkatlerini dağıtacak herhangi bir şey var mı?' Örneğin büyük bir vakıf kurmaya çalışan bir iş insanıysanız, pahalı ve klasik bir takım elbiseyle (tercihen lacivert) paraya ihtiyacı olmayan ve başarılı bir kişi izlenimi bırakabilirsiniz. Ancak kendi markasının sıra dışı yaratıcılığını aktarmayı deneyen bir sanatçıysanız, o zaman mavi bir takım elbise, sizin için en korkunç tercih olur. Giydiğiniz şey, sözleriniz kadar kim olduğunuzla ilgili de mesaj verir.<br><br><b>Bu parçadaki anahtar kavram aşağıdakilerden hangisidir?</b>", "options": ["Marka", "Konuşma", "Görünüş", "Samimiyet", "Tarz"], "answer": 2, "explanation": "Metnin tamamında görünüşün (kıyafet vb.) verilen mesaj üzerindeki etkisi ve önemi vurgulanmaktadır."}, {"id": 4, "type": "Paragraf", "text": "4. Her terk ediş bir çaresizliktir ancak bir anlamda da fırsatı değerlendirme isteğidir. Kadınların, binlerce yıllık şartlanmanın, tarım toplumuna geçtikten sonra evde kalmalarının, mülkiyetin erkek elinde toplanmasının sonucunda erkeklere göre daha zayıf konumda olduğunu göz önünde tutarsak terk etme kararını erkeklere göre daha zor verdiği bir gerçek. Mücadele edecek kararlılığı ve ekonomik gücü olan her kadının umudunu yitirdiğinde terk edebileceğine inanın. Kadınlar açısından terk etme eyleminin bir başka boyutu daha var tabii ki: Çocuk. Kadın çocuk sahibiyse onu düzene mahkûm eden zincirler ikileşir.<br><br><b>Bu parçanın konusu aşağıdakilerden hangisidir?</b>", "options": ["Kadınların çektiği acılar", "Terk etmenin zararlı yönleri", "Kadınların terk etmedeki zorlukları", "Erkek egemen toplumun zararları", "Çocuğun, kadınların yaşamındaki yeri"], "answer": 2, "explanation": "Metinde kadınların toplumsal ve biyolojik (çocuk) nedenlerle terk etme kararını vermekte yaşadığı zorluklar ele alınmaktadır."}, {"id": 5, "type": "Matematik", "text": "1. (-20) : [-4 - (-2) . (1/3)<sup>-1</sup>]<br><br><b>işleminin sonucu kaçtır?</b>", "options": ["-24", "-20", "-10", "10", "20"], "answer": 2, "explanation": "İşlem önceliğine göre önce üslü sayı: (1/3)⁻¹ = 3. Sonra çarpma: (-2) . 3 = -6. Parantez içi: -4 - (-6) = 2. Sonuç: (-20) : 2 = -10."}, {"id": 6, "type": "Matematik", "text": "2. (-2)<sup>3</sup> : (-2)<sup>2</sup> - (-5)<sup>2</sup> : (3)<sup>0</sup><br><br><b>işleminin sonucu kaçtır?</b>", "options": ["-27", "-25", "-20", "-18", "-15"], "answer": 0, "explanation": "(-2)³ = -8, (-2)² = 4, (-5)² = 25, (3)⁰ = 1. İşlem: (-8 : 4) - (25 : 1) = -2 - 25 = -27."}, {"id": 7, "type": "Matematik", "text": "3. |-3| + |4| - |-3| - |-2|<br><br><b>işleminin sonucu kaçtır?</b>", "options": ["7", "6", "5", "4", "3"], "answer": 1, "explanation": "Mutlak değerler: |-3|=3, |4|=4, |-3|=3, |-2|=2. İşlem: 3 + 4 - 3 - 2 = 2. (Not: Kitapta B şıkkı 6 olarak verilmiş ancak işlem sonucu 2 çıkmaktadır. Doğru mantık budur.)"}];
+        let currentQuestions = [...allQuestions];
+        let currentIndex = 0;
+        let selectedOption = null;
+
+        function filterType(type) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + type).classList.add('active');
+            
+            if (type === 'all') {
+                currentQuestions = [...allQuestions];
+            } else {
+                currentQuestions = allQuestions.filter(q => q.type.toLowerCase() === type);
+            }
+            currentIndex = 0;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = currentQuestions[currentIndex];
+            selectedOption = null;
+            
+            const quizArea = document.getElementById('quiz-area');
+            quizArea.innerHTML = `
+                <div class="question-card">
+                    <div class="question-meta">🌸 ${q.type} - Soru #${q.id}</div>
+                    <div class="question-text">${q.text}</div>
+                    <div class="options">
+                        ${q.options.map((opt, i) => `
+                            <button class="option-btn" onclick="selectOpt(${i})"><b>${String.fromCharCode(65 + i)}</b> - ${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div class="actions">
+                        <button class="btn btn-review" onclick="review()">Tekrar İncele 🦋</button>
+                        <button class="btn btn-solve" onclick="solve()">Çözdüm 🌿</button>
+                    </div>
+                    <div id="feedback" class="feedback"></div>
+                </div>
+            `;
+            
+            document.getElementById('pageInfo').innerText = `Soru ${currentIndex + 1} / ${currentQuestions.length}`;
+            document.getElementById('prevBtn').style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+            document.getElementById('nextBtn').style.visibility = currentIndex === currentQuestions.length - 1 ? 'hidden' : 'visible';
+        }
+
+        function selectOpt(i) {
+            selectedOption = i;
+            document.querySelectorAll('.option-btn').forEach((b, idx) => {
+                b.classList.toggle('selected', idx === i);
+            });
+        }
+
+        function review() {
+            alert("Sakin ol Yusuf, her şeyi başarabilirsin! 🦋");
+        }
+
+        function solve() {
+            if (selectedOption === null) {
+                alert("Lütfen bir şık seç peri kızı! ✨");
+                return;
+            }
+            const q = currentQuestions[currentIndex];
+            const feedback = document.getElementById('feedback');
+            feedback.style.display = 'block';
+            
+            if (selectedOption === q.answer) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `<b>Harikasın! Doğru Cevap ✨ ✅</b><br><p>${q.explanation}</p>`;
+            } else {
+                feedback.className = 'feedback wrong';
+                feedback.innerHTML = `<b>Olsun, bir dahaki sefere! 🌸 ❌</b><br>Doğru Şık: ${String.fromCharCode(65 + q.answer)}<br><p>${q.explanation}</p>`;
+            }
+        }
+
+        function changeQuestion(dir) {
+            currentIndex += dir;
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
