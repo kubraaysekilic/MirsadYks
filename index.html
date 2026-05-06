@@ -14,6 +14,9 @@
             --deep-purple: #7b1fa2;
             --accent-pink: #ff80ab;
         }
+
+        * { box-sizing: border-box; }
+
         body {
             margin: 0;
             padding: 0;
@@ -21,27 +24,82 @@
             background: url('m.jpg') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
+            overflow-x: hidden;
         }
+
+        /* ── Floating Particles ── */
+        #particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatUp var(--dur) ease-in infinite;
+            animation-delay: var(--delay);
+        }
+        @keyframes floatUp {
+            0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+            10%  { opacity: 0.7; }
+            90%  { opacity: 0.4; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* ── Overlay ── */
         .overlay {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.48);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             min-height: 100vh;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
+
+        /* ── Container entrance ── */
         .container {
             max-width: 800px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.97);
             border-radius: 40px;
             padding: 40px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 60px rgba(123,31,162,0.12), 0 2px 8px rgba(255,128,171,0.15);
             border: 4px solid var(--pudra-pink);
             position: relative;
             margin-top: 20px;
+            animation: containerIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
+        @keyframes containerIn {
+            from { opacity: 0; transform: translateY(40px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0)   scale(1); }
+        }
+
+        /* Shimmer border */
+        .container::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 44px;
+            background: linear-gradient(120deg, #ff80ab, rgb(236, 213, 240), #80cbc4, rgb(197, 228, 210));
+            background-size: 300% 300%;
+            animation: borderShimmer 5s linear infinite;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        @keyframes borderShimmer {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ── H1 ── */
         h1 {
             font-family: 'Dancing Script', cursive;
             color: var(--deep-purple);
@@ -49,12 +107,40 @@
             font-size: 2.8rem;
             margin-bottom: 30px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            animation: titleIn 1s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+            position: relative;
         }
+        @keyframes titleIn {
+            from { opacity: 0; transform: translateY(-20px); letter-spacing: 0.3em; }
+            to   { opacity: 1; transform: translateY(0);     letter-spacing: normal; }
+        }
+        h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            margin: 10px auto 0;
+            background: linear-gradient(90deg, var(--accent-pink), var(--deep-purple));
+            border-radius: 2px;
+            animation: lineGrow 0.8s 1.1s ease both;
+            transform-origin: center;
+        }
+        @keyframes lineGrow {
+            from { transform: scaleX(0); }
+            to   { transform: scaleX(1); }
+        }
+
+        /* ── Nav tabs ── */
         .nav-tabs {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-bottom: 30px;
+            animation: fadeIn 0.7s 0.6s ease both;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
         .tab-btn {
             padding: 12px 30px;
@@ -62,23 +148,51 @@
             border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
-            transition: 0.3s;
+            font-family: 'Quicksand', sans-serif;
             background: var(--soft-purple);
             color: var(--deep-purple);
             font-size: 1rem;
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
         }
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.6) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.4s ease;
+        }
+        .tab-btn:hover::after { transform: scale(2.5); }
+        .tab-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(123,31,162,0.2); }
         .tab-btn.active {
             background: var(--accent-pink);
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 128, 171, 0.4);
+            box-shadow: 0 4px 20px rgba(255, 128, 171, 0.5);
+            transform: translateY(-2px);
         }
+
+        /* ── Question card ── */
         .question-card {
             background: #fff;
             padding: 30px;
             border-radius: 25px;
             border: 1px solid var(--pudra-pink);
-            box-shadow: inset 0 0 15px rgba(252, 228, 236, 0.5);
+            box-shadow: inset 0 0 15px rgba(252, 228, 236, 0.5), 0 4px 20px rgba(0,0,0,0.05);
+            animation: cardSlideIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
+        @keyframes cardSlideIn {
+            from { opacity: 0; transform: translateX(30px) scale(0.98); }
+            to   { opacity: 1; transform: translateX(0)    scale(1); }
+        }
+        .card-exit {
+            animation: cardSlideOut 0.3s ease forwards;
+        }
+        @keyframes cardSlideOut {
+            to { opacity: 0; transform: translateX(-30px) scale(0.96); }
+        }
+
         .question-meta {
             color: var(--accent-pink);
             font-weight: bold;
@@ -87,13 +201,17 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            animation: fadeIn 0.5s 0.1s ease both;
         }
         .question-text {
             font-size: 1.2rem;
             line-height: 1.8;
             color: #444;
             margin-bottom: 30px;
+            animation: fadeIn 0.5s 0.2s ease both;
         }
+
+        /* ── Options ── */
         .options {
             display: grid;
             gap: 15px;
@@ -105,42 +223,83 @@
             border-radius: 20px;
             text-align: left;
             cursor: pointer;
-            transition: 0.3s;
             font-size: 1.1rem;
+            font-family: 'Quicksand', sans-serif;
             color: #2e7d32;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+            animation: optionIn 0.4s calc(0.25s + var(--i, 0) * 0.07s) cubic-bezier(0.22,1,0.36,1) both;
         }
+        @keyframes optionIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            left: -60%;
+            top: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.5s ease;
+        }
+        .option-btn:hover::before { left: 160%; }
         .option-btn:hover {
             background: #c8e6c9;
-            transform: translateX(5px);
+            transform: translateX(6px);
+            box-shadow: -4px 0 0 #4caf50, 0 4px 12px rgba(0,0,0,0.08);
         }
         .option-btn.selected {
             border-color: var(--accent-pink);
             background: #fce4ec;
             color: var(--deep-purple);
+            transform: translateX(6px);
+            box-shadow: -4px 0 0 var(--accent-pink), 0 4px 15px rgba(255,128,171,0.2);
         }
+
+        /* ── Buttons ── */
         .actions {
             display: flex;
             gap: 20px;
             justify-content: center;
             margin-top: 40px;
             flex-wrap: wrap;
+            animation: fadeIn 0.5s 0.4s ease both;
         }
         .btn {
             padding: 15px 40px;
             border: none;
             border-radius: 35px;
             font-weight: bold;
+            font-family: 'Quicksand', sans-serif;
             cursor: pointer;
-            transition: 0.3s;
             font-size: 1.1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s, box-shadow 0.25s, opacity 0.25s;
         }
-        .btn-solve { background: var(--deep-purple); color: white; }
-        .btn-review { background: var(--pudra-pink); color: var(--deep-purple); }
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.25);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .btn:hover::after { opacity: 1; }
+        .btn:hover { transform: scale(1.06) translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.18); opacity: 0.95; }
+        .btn:active { transform: scale(0.97); }
+
+        .btn-solve   { background: var(--deep-purple); color: white; }
+        .btn-review  { background: var(--pudra-pink);  color: var(--deep-purple); }
         .btn-confirm { background: #4caf50; color: white; }
-        .btn-proof { background: #ff5722; color: white; display: none; }
-        .btn:hover { transform: scale(1.05); opacity: 0.95; }
-        
+        .btn-proof   { background: #ff5722; color: white; display: none; }
+
+        /* ── Feedback ── */
         .feedback {
             margin-top: 30px;
             padding: 25px;
@@ -149,9 +308,38 @@
             line-height: 1.7;
             font-size: 1.1rem;
         }
-        .feedback.correct { background: #e8f5e9; border: 2px solid #4caf50; color: #2e7d32; }
-        .feedback.wrong { background: #ffebee; border: 2px solid #ef5350; color: #c62828; }
-        
+        .feedback.correct {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            color: #2e7d32;
+            animation: feedbackPop 0.5s cubic-bezier(0.22,1,0.36,1);
+        }
+        .feedback.wrong {
+            background: #ffebee;
+            border: 2px solid #ef5350;
+            color: #c62828;
+            animation: feedbackPop 0.5s cubic-bezier(0.22,1,0.36,1);
+        }
+        @keyframes feedbackPop {
+            0%   { opacity: 0; transform: scale(0.92) translateY(10px); }
+            60%  { transform: scale(1.03); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* ── Sparkle burst on correct ── */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 1.4rem;
+            animation: sparkleFly 1.2s ease-out forwards;
+        }
+        @keyframes sparkleFly {
+            0%   { opacity: 1; transform: translate(0,0) scale(1); }
+            100% { opacity: 0; transform: translate(var(--sx), var(--sy)) scale(0.3); }
+        }
+
+        /* ── Pagination ── */
         .pagination {
             display: flex;
             justify-content: space-between;
@@ -159,15 +347,27 @@
             margin-top: 40px;
             width: 100%;
             max-width: 800px;
+            animation: fadeIn 0.7s 0.8s ease both;
         }
-        .page-info { 
-            color: var(--deep-purple); 
-            font-weight: 600; 
+        .page-info {
+            color: var(--deep-purple);
+            font-weight: 600;
             background: white;
             padding: 10px 20px;
             border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+            transition: transform 0.3s;
+        }
+        .page-info.bump {
+            animation: bumpInfo 0.4s ease;
+        }
+        @keyframes bumpInfo {
+            0%   { transform: scale(1); }
+            40%  { transform: scale(1.12); }
+            100% { transform: scale(1); }
         }
 
+        /* ── Analysis capture ── */
         #analysis-capture {
             position: absolute;
             left: -9999px;
@@ -192,7 +392,36 @@
             margin-bottom: 10px;
             font-size: 1.2rem;
         }
-        
+
+        /* ── Progress bar ── */
+        .progress-wrap {
+            width: 100%;
+            height: 6px;
+            background: var(--pudra-pink);
+            border-radius: 3px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-pink), var(--deep-purple));
+            border-radius: 3px;
+            transition: width 0.6s cubic-bezier(0.22,1,0.36,1);
+        }
+
+        /* ── Ripple click ── */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleAnim 0.6s linear;
+            background: rgba(255,255,255,0.35);
+            pointer-events: none;
+        }
+        @keyframes rippleAnim {
+            to { transform: scale(4); opacity: 0; }
+        }
+
         @media (max-width: 600px) {
             .container { padding: 25px; border-radius: 30px; }
             h1 { font-size: 2rem; }
@@ -202,10 +431,18 @@
     </style>
 </head>
 <body>
+    <!-- Floating particles -->
+    <canvas id="particles"></canvas>
+
     <div class="overlay">
         <div class="container">
             <h1>🌿 Yusuf Mirsad'ın YKS Hazırlık sitesi 🌿</h1>
-            
+
+            <!-- Progress bar -->
+            <div class="progress-wrap">
+                <div class="progress-bar" id="progressBar" style="width:0%"></div>
+            </div>
+
             <div class="nav-tabs">
                 <button class="tab-btn active" id="tab-all" onclick="filterType('all')">Hepsi</button>
                 <button class="tab-btn" id="tab-paragraf" onclick="filterType('paragraf')">Paragraf</button>
@@ -234,7 +471,121 @@
     </div>
 
     <script>
-        const allQuestions = [
+    /* ══════════════════════════════════════
+       PARTICLE CANVAS
+    ══════════════════════════════════════ */
+    (function () {
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [];
+
+        const COLORS = ['#ff80ab','#ce93d8','#80cbc4','#fff176','#f48fb1','#b39ddb'];
+        const EMOJIS = ['🌸','✨','🌿','🦋','⭐'];
+
+        function resize() {
+            W = canvas.width  = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        function rand(a, b) { return a + Math.random() * (b - a); }
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = rand(0, W);
+                this.y = rand(H * 0.5, H + 50);
+                this.r = rand(3, 8);
+                this.vy = rand(-0.6, -1.8);
+                this.vx = rand(-0.4, 0.4);
+                this.alpha = 0;
+                this.targetAlpha = rand(0.3, 0.7);
+                this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+                this.type = Math.random() < 0.15 ? 'emoji' : 'circle';
+                if (this.type === 'emoji') {
+                    this.emoji = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+                    this.r = rand(10, 18);
+                }
+                this.phase = rand(0, Math.PI * 2);
+            }
+            update() {
+                this.y  += this.vy;
+                this.x  += this.vx + Math.sin(this.phase + Date.now() * 0.001) * 0.3;
+                this.alpha = Math.min(this.alpha + 0.008, this.targetAlpha);
+                if (this.y < -30) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                if (this.type === 'emoji') {
+                    ctx.font = `${this.r * 2}px serif`;
+                    ctx.fillText(this.emoji, this.x, this.y);
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 38; i++) {
+            const p = new Particle();
+            p.y = rand(0, H); // start distributed
+            particles.push(p);
+        }
+
+        function loop() {
+            ctx.clearRect(0, 0, W, H);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(loop);
+        }
+        loop();
+    })();
+
+    /* ══════════════════════════════════════
+       RIPPLE on buttons
+    ══════════════════════════════════════ */
+    document.addEventListener('click', function (e) {
+        const btn = e.target.closest('.btn, .tab-btn, .option-btn');
+        if (!btn) return;
+        const rect = btn.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px`;
+        btn.style.position = 'relative';
+        btn.style.overflow = 'hidden';
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 700);
+    });
+
+    /* ══════════════════════════════════════
+       SPARKLE BURST
+    ══════════════════════════════════════ */
+    function spawnSparkles(x, y) {
+        const emojis = ['✨','🌸','⭐','🦋','💜'];
+        for (let i = 0; i < 10; i++) {
+            const el = document.createElement('div');
+            el.className = 'sparkle';
+            el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            const angle = (Math.PI * 2 / 10) * i + Math.random() * 0.4;
+            const dist  = 60 + Math.random() * 80;
+            el.style.setProperty('--sx', Math.cos(angle) * dist + 'px');
+            el.style.setProperty('--sy', Math.sin(angle) * dist + 'px');
+            el.style.left = x + 'px';
+            el.style.top  = y + 'px';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 1300);
+        }
+    }
+
+    /* ══════════════════════════════════════
+       QUIZ DATA
+    ══════════════════════════════════════ */
+    const allQuestions = [
     {
         "id": 1,
         "type": "Paragraf",
@@ -257,37 +608,37 @@
         "text": "3. Konuşmalarda belki de en önemli noktalardan biri, görünüştür. Görünüşünüzün nasıl olması gerektiğiyle ilgili kaygılarınız varsa önce şu iki soruya odaklanın: 'Görünüşüm iletmek istediğim mesaja uygun mu?' ve 'Kıyafetimde, dinleyicilerin mesajıma odaklanma konusunda dikkatlerini dağıtacak herhangi bir şey var mı?' Örneğin büyük bir vakıf kurmaya çalışan bir iş insanıysanız, pahalı ve klasik bir takım elbiseyle (tercihen lacivert) paraya ihtiyacı olmayan ve başarılı bir kişi izlenimi bırakabilirsiniz. Ancak kendi markasının sıra dışı yaratıcılığını aktarmayı deneyen bir sanatçıysanız, o zaman mavi bir takım elbise, sizin için en korkunç tercih olur. Giydiğiniz şey, sözleriniz kadar kim olduğunuzla ilgili de mesaj verir.<br><br><b>Bu parçadaki anahtar kavram aşağıdakilerden hangisidir?</b>",
         "options": ["Marka", "Konuşma", "Görünüş", "Samimiyet", "Tarz"],
         "answer": 2,
-        "explanation": "Cevap C şıkkıdır. Metnin tamamında görünüşün (kıyafet vb.) verilen mesaj üzerindeki etkisi ve önemi vurgulanmaktadır."
+        "explanation": "Cevap C şıkkıdır. Metinde görünüşün iletişimdeki belirleyici rolü anlatılmaktadır."
     },
     {
         "id": 4,
         "type": "Paragraf",
-        "text": "4. Her terk ediş bir charesizliktir ancak bir anlamda da fırsatı değerlendirme isteğidir. Kadınların, binlerce yıllık şartlanmanın, tarım toplumuna geçtikten sonra evde kalmalarının, mülkiyetin erkek elinde toplanmasının sonucunda erkeklere göre daha zayıf konumda olduğunu göz önünde tutarsak terk etme kararını erkeklere göre daha zor verdiği bir gerçek. Mücadele edecek kararlılığı ve ekonomik gücü olan her kadının umudunu yitirdiğinde terk edebileceğine inanın. Kadınlar açısından terk etme eyleminin bir başka boyutu daha var tabii ki: Çocuk. Kadın çocuk sahibiyse onu düzene mahkûm eden zincirler ikileşir.<br><br><b>Bu parçada üzerinde durulan aşağıdakilerden hangisidir?</b>",
-        "options": ["Kadınların çektiği acılar", "Terk etmenin zararlı yönleri", "Kadınların terk etmedeki zorlukları", "Erkek egemen toplumun zararları", "Çocuğun, kadınların yaşamındaki yeri"],
+        "text": "4. Defalarca ölçtük biçtik. Tartıştık. Karar verdik. Kesindir, kesin. Ne zaman geldik buraya; neden bu şehirde olduğumuzu unuttuk. Hayatın süratle aktığı dönemde duraksadık. Bir soru sormak istedik; sormayı unuttuk. Sorduk; cevap bulamadık. Cevap bulduk; anlamını yitirdi. Hayat belki de bu. Ulaşmak için yola çıkılır. Yolun ortasında hedefin yanlış olduğu anlaşılır. Vazgeçilmez. Devam edilir. Hayalden vazgeçmek ne kadar zor. Hayal kurmak ise ne kadar insani. İnsan hayalsiz yaşayabilir mi?<br><br><b>Bu parçanın ana düşüncesi aşağıdakilerden hangisidir?</b>",
+        "options": ["Hayat sorgulanmalıdır.", "İnsanlar hedeflerine ulaşamazlar.", "Hayaller insanı yaşatan temel güçtür.", "Karar vermek zordur.", "Şehir yaşamı insanı yıpratır."],
         "answer": 2,
-        "explanation": "Cevap C şıkkıdır. Metinde kadınların toplumsal ve biyolojik (çocuk) nedenlerle terk etme kararını vermekte yaşadığı zorluklar ele alınmaktadır."
+        "explanation": "Cevap C şıkkıdır. Parçada hayalsiz yaşamanın imkânsızlığı ve hayallerin insani bir ihtiyaç olduğu vurgulanmaktadır."
     },
     {
         "id": 5,
         "type": "Paragraf",
-        "text": "5. Türkler, kendilerini yeryüzünde hak ve adaleti korumakla görevlendirilmiş olarak görüyordu. Asya Hun İmparatorluğu Hükümdarı Mete Han, o nedenle Çin imparatoruna gönderdiği mektupta, kendisinin Tanrı tarafından tahta çıkarıldığını ifade ediyor, askerî başarılarının buna dayandığını öne sürüyordu. Savaşlarda Gök Tanrı'nın kendilerini koruduklarına inanan Türkler, bu uğurda ölmeleri hâlinde Tanrı'nın kendilerini cennetine koyacaklarına inanıyorlardı. Türk hükümdarları bu inanca dayalı olarak kendilerini yeryüzünün temsilcileri olarak görüp Tanrı adına hüküm verdiklerini ileri sürdükleri için buyrukları Tanrı buyruğu gibiydi. Bu buyruklara uymayanları Tanrı'nın cezalandıracağı belirtiliyordu.<br><br><b>Bu parçada üzerinde durulan aşağıdakilerden hangisidir?</b>",
-        "options": ["Türklerde inanç ve yönetim arasındaki ilişki", "Hükümdarların adalet dağıtma amacı", "Devlet yöneticilerinin inanma süreçleri", "Tek tanrılı dinlerin doğuşu", "Türklerin inanç sistemleri"],
-        "answer": 1,
-        "explanation": "Cevap B şıkkıdır. Parçada Türklerin inançlarının yönetim anlayışı ve hükümdarların meşruiyeti üzerindeki etkisi anlatılmaktadır."
+        "text": "5. Roman; çok katmanlı, çok sesli ve çok anlamlı bir edebî türdür. İyi bir roman okuru olmak için sadece okumak yetmez; gözlemlemek, sorgulamak ve yaşamak gerekir. Yaşanan her an, bir roman cümlesidir aslında. Bunu fark edebilenler, hem iyi okur hem de iyi yazar olabilirler. Yazarın görevi ise bu sıradan cümleleri olağanüstü bir kurguya dönüştürmektir. Dil, bu dönüşümün en önemli aracıdır. Dilin sınırları, yazarın sınırlarıdır. Dilin zenginliği, edebiyatın zenginliğidir.<br><br><b>Bu parçanın konusu aşağıdakilerden hangisidir?</b>",
+        "options": ["Roman okurken dikkat edilmesi gerekenler", "İyi roman yazmanın sırları", "Roman ve dil arasındaki ilişki", "Romanın edebî özellikleri", "Yazarın toplumsal görevi"],
+        "answer": 2,
+        "explanation": "Cevap C şıkkıdır. Parçada romanın dille ilişkisi ve dilin edebiyattaki belirleyici rolü ele alınmaktadır."
     },
     {
         "id": 6,
         "type": "Paragraf",
-        "text": "6. Günümüz şartlarında siyaset ve edebiyat kelimelerini bir arada anmak zor olsa da tarih boyunca edebiyatın siyasetle haşır neşirliği var olagelmiştir. Şair yahut yazar, nihayette içinde yaşadığı toplumun bir parçası olarak karşımıza çıkan sosyal bir varlıktır. Eserini yazma sürecinde çoğu zaman toplumsal yapıdan uzaklaşmaya çalışsa da her edebiyatçı, toplum içerisinde varlığını sürdürmek zorundadır ve bu zorunluluk zaman zaman edebiyatla siyasetin aynı karede buluşmasına yol açar. Bu buluşma, çoğu zaman hamilik/mesenlik kavramı etrafında şekillenir ki -istisnaları olmakla birlikte- çağlar boyunca gerek Doğu'da gerek Batı'da edebiyatçıların ya edebiyatın propaganda gücünden faydalanarak siyasal iktidarı çeşitli şekillerde destekledikleri yahut da tam tersi istikamette siyasal iktidarı eleştirip muhalefet yaptıkları görülmüştür.<br><br><b>Bu parçada aşağıdakilerin hangisi üzerinde durulmuştur?</b>",
-        "options": ["Edebiyat - siyaset ilişkisi", "Sanatçı - toplum ilişkisi", "Sanat - gerçek ilişkisi", "Sanat - çıkar ilişkisi", "Edebiyat - kültür ilişkisi"],
-        "answer": 2,
-        "explanation": "Cevap C şıkkıdır. Metinde edebiyatçıların toplumsal bir varlık olmalarından dolayı siyasetle olan kaçınılmaz ilişkileri ve bu ilişkinin farklı biçimleri ele alınmaktadır."
+        "text": "6. Mutluluk anlık bir durum değildir. Mutluluk, hayatın içine yedirilmiş küçük anlardır. Sabah kahvesinin kokusu, sevilen birinin sesi, yağmurun sesini duymak... Bunlar büyük şeyler değildir. Ama hayatı güzel kılan şeyler de bunlardır. Büyük mutlulukları beklerken küçük mutlulukları kaçırırız. Oysa yaşam; büyük olayların değil, küçük anların toplamıdır. Bunu fark etmek, aslında bir tür olgunluktur.<br><br><b>Bu parçada savunulan ana düşünce nedir?</b>",
+        "options": ["Mutluluk herkese göre farklıdır.", "Büyük mutluluklar küçük mutluluklardan önemlidir.", "Mutluluk anlık duygulardan oluşur.", "Hayatın güzelliği küçük anlarda gizlidir.", "Sabah rutinleri mutluluğu artırır."],
+        "answer": 3,
+        "explanation": "Cevap D şıkkıdır. Metinde hayatın güzelliğinin küçük anlarda gizli olduğu ve bunların farkında olmanın olgunluk işareti sayıldığı vurgulanmaktadır."
     },
     {
         "id": 7,
         "type": "Paragraf",
-        "text": "7. Michel Butor Roman Üstüne Denemeler adlı kitabında anlatının laboratuvarı olan romanın en yetkin varlık bilimsel alan olduğunu ve gerçeğin bize nasıl göründüğünü inceleyeceğimiz en yetkin yer olduğunu söyler. Hele de edebiyat ve felsefe bilimleri yan yana sıralandığında varoluşçu romancıların bu türlerin başarılı temsilcileri olduğu söylenebilir. Jean Paul Sartre'ın, Simone de Beauvoir'ın, Albert Camus'nün hem filozof hem de romancı yanlarını unutmamak gerekir. Sadece adlarını burada saydığımız isimlerin haricinde varoluşçuluğun asıl temsilciliğini yapmış Gabriel Marcel'den Dostoyevski'ye kadar aktif ve gerçek egzistansiyalistler, biraz daha önceye gidecek olursak Soren Aabye Kierkegaard'dan Martin Heidegger'e hatta Jaspers'e ve Marly Panty'ye kadar hemen hemen tüm filozoflar da tezlerini, hipotezlerini, ilkelerini ve savlarını hem kuramsal felsefi metinlerle hem de onları edebî metinler içinde eriterek vermeyi gerekli görmüşlerdir.<br><br><b>Bu parçada üzerinde durulan aşağıdakilerden hangisidir?</b>",
-        "options": ["Edebiyat ile felsefe arasındaki ilişki", "Edebiyatın felsefeye kattığı güç", "Edebî metinlerin felsefecilere etkisi", "Felsefenin edebiyata kattığı güç", "Felsefi metinlerin edebiyatçılara etkisi"],
+        "text": "7. Felsefe, yalnızca filozofların uğraştığı soyut bir düşünce sistemi değildir. Felsefe; hayatın her alanında var olan sorular bütünüdür. 'Neden buradayım?', 'Doğru olan nedir?', 'Adalet mümkün mü?' gibi sorular, her insanın zihninde dolaşır. Edebiyat ise bu soruları en güzel şekilde dile getiren sanat dalıdır. Birçok büyük yazar, aynı zamanda derin bir düşünürdür. Dostoyevski, Camus, Kafka... Hepsi insan varoluşunun sorularını edebî metinler aracılığıyla sorgulamıştır.<br><br><b>Bu parçada üzerinde durulan düşünce aşağıdakilerden hangisidir?</b>",
+        "options": ["Felsefe akademisyenlere özgü bir alandır.", "Edebiyat felsefeyi gereksiz kılar.", "Büyük yazarlar aynı zamanda iyi düşünürlerdir.", "Felsefî sorular edebiyat aracılığıyla dile getirilir.", "Varoluş soruları cevapsız kalır."],
         "answer": 3,
         "explanation": "Cevap D şıkkıdır. Parçada birçok filozofun ve yazarın felsefi düşüncelerini edebî metinler aracılığıyla dile getirdiği vurgulanmaktadır."
     },
@@ -370,13 +721,20 @@
         let selectedOption = null;
         let userAnswers = {};
 
+        /* ── Progress bar update ── */
+        function updateProgress() {
+            const answered = Object.keys(userAnswers).length;
+            const pct = (answered / allQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = pct + '%';
+        }
+
         function filterType(type) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('tab-' + type).classList.add('active');
-            
-            const quizArea = document.getElementById('quiz-area');
+
+            const quizArea   = document.getElementById('quiz-area');
             const pagination = document.querySelector('.pagination');
-            
+
             if (type === 'matematik') {
                 quizArea.innerHTML = '<div class="question-card" style="text-align:center; padding: 50px;"><h2>Çok yakında...</h2></div>';
                 pagination.style.display = 'none';
@@ -384,38 +742,67 @@
             } else {
                 pagination.style.display = 'flex';
             }
-            
+
             if (type === 'all') {
                 currentQuestions = [...allQuestions];
             } else {
                 currentQuestions = allQuestions.filter(q => q.type.toLowerCase() === type);
             }
             currentIndex = 0;
-            if(currentQuestions.length > 0) {
+            if (currentQuestions.length > 0) {
                 loadQuestion();
             } else {
                 quizArea.innerHTML = '<div class="question-card" style="text-align:center; padding: 50px;"><h2>Soru bulunamadı 🌸</h2></div>';
             }
         }
 
-        function loadQuestion() {
+        function loadQuestion(dir = 1) {
             const q = currentQuestions[currentIndex];
             selectedOption = userAnswers[q.id] !== undefined ? userAnswers[q.id] : null;
-            
+
             const quizArea = document.getElementById('quiz-area');
+
+            /* slide out old card */
+            const old = quizArea.querySelector('.question-card');
+            if (old) {
+                old.style.animation = `cardSlideOut 0.28s ease forwards`;
+                old.style.transform = dir > 0 ? '' : '';
+                setTimeout(() => renderCard(q, quizArea), 280);
+            } else {
+                renderCard(q, quizArea);
+            }
+
+            document.getElementById('pageInfo').innerText = `Soru ${currentIndex + 1} / ${currentQuestions.length}`;
+            const pi = document.getElementById('pageInfo');
+            pi.classList.remove('bump');
+            void pi.offsetWidth;
+            pi.classList.add('bump');
+
+            document.getElementById('prevBtn').style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+            document.getElementById('nextBtn').style.visibility = currentIndex === currentQuestions.length - 1 ? 'hidden' : 'visible';
+
+            updateProgress();
+        }
+
+        function renderCard(q, quizArea) {
             quizArea.innerHTML = `
                 <div class="question-card">
                     <div class="question-meta">🌸 ${q.type} - Soru #${q.id}</div>
                     <div class="question-text">${q.text}</div>
                     <div class="options">
                         ${q.options.map((opt, i) => `
-                            <button class="option-btn ${selectedOption === i ? 'selected' : ''}" id="opt-${i}" onclick="selectOpt(${i})"><b>${String.fromCharCode(65 + i)}</b> - ${opt}</button>
+                            <button class="option-btn ${selectedOption === i ? 'selected' : ''}"
+                                    id="opt-${i}"
+                                    style="--i:${i}"
+                                    onclick="selectOpt(${i})">
+                                <b>${String.fromCharCode(65 + i)}</b> - ${opt}
+                            </button>
                         `).join('')}
                     </div>
                     <div class="actions" id="action-buttons">
                         ${userAnswers[q.id] !== undefined ? `
                             <button class="btn btn-review" onclick="review()">Tekrar İncele 🦋</button>
-                            <button class="btn btn-solve" onclick="solve()">Çözdüm 🌿</button>
+                            <button class="btn btn-solve"  onclick="solve()">Çözdüm 🌿</button>
                         ` : `
                             <button class="btn btn-confirm" id="btn-confirm" onclick="confirmSelection()">Onayla ✔️</button>
                         `}
@@ -424,18 +811,13 @@
                     <div id="feedback" class="feedback"></div>
                 </div>
             `;
-            
+
             if (userAnswers[q.id] !== undefined) {
                 document.querySelectorAll('.option-btn').forEach(b => {
                     b.onclick = null;
                     b.style.cursor = 'default';
                 });
             }
-
-            document.getElementById('pageInfo').innerText = `Soru ${currentIndex + 1} / ${currentQuestions.length}`;
-            document.getElementById('prevBtn').style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
-            document.getElementById('nextBtn').style.visibility = currentIndex === currentQuestions.length - 1 ? 'hidden' : 'visible';
-            
             checkProofButton();
         }
 
@@ -451,17 +833,18 @@
                 alert("Lütfen bir şık seç little lady ✨");
                 return;
             }
-            
+
             const q = currentQuestions[currentIndex];
             userAnswers[q.id] = selectedOption;
+            updateProgress();
 
             const actionButtons = document.getElementById('action-buttons');
             actionButtons.innerHTML = `
                 <button class="btn btn-review" onclick="review()">Tekrar İncele 🦋</button>
-                <button class="btn btn-solve" onclick="solve()">Çözdüm 🌿</button>
-                <button class="btn btn-proof" id="btn-proof" onclick="generateProof()" style="background:#ff5722; color:white; display:none;">Kanıt Çıkar 📸</button>
+                <button class="btn btn-solve"  onclick="solve()">Çözdüm 🌿</button>
+                <button class="btn btn-proof"  id="btn-proof" onclick="generateProof()" style="background:#ff5722; color:white; display:none;">Kanıt Çıkar 📸</button>
             `;
-            
+
             document.querySelectorAll('.option-btn').forEach(b => {
                 b.onclick = null;
                 b.style.cursor = 'default';
@@ -478,10 +861,13 @@
             const q = currentQuestions[currentIndex];
             const feedback = document.getElementById('feedback');
             feedback.style.display = 'block';
-            
+
             if (selectedOption === q.answer) {
                 feedback.className = 'feedback correct';
                 feedback.innerHTML = `<b>Harikasın Doğru Cevap ✨</b><br><p>${q.explanation}</p>`;
+                /* sparkles from feedback box */
+                const rect = feedback.getBoundingClientRect();
+                spawnSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
             } else {
                 feedback.className = 'feedback wrong';
                 feedback.innerHTML = `<b>Canın sağ olsun, bir dahaki sefere 🌸</b><br>Doğru Şık: ${String.fromCharCode(65 + q.answer)}<br><p>${q.explanation}</p>`;
@@ -490,13 +876,13 @@
 
         function changeQuestion(dir) {
             currentIndex += dir;
-            loadQuestion();
+            loadQuestion(dir);
         }
 
         function checkProofButton() {
-            const isLast = currentIndex === currentQuestions.length - 1;
+            const isLast     = currentIndex === currentQuestions.length - 1;
             const isAnswered = userAnswers[currentQuestions[currentIndex].id] !== undefined;
-            const proofBtn = document.getElementById('btn-proof');
+            const proofBtn   = document.getElementById('btn-proof');
             if (proofBtn) {
                 proofBtn.style.display = (isLast && isAnswered) ? 'inline-block' : 'none';
             }
@@ -504,13 +890,13 @@
 
         async function generateProof() {
             const analysisDiv = document.getElementById('analysis-capture');
-            const contentDiv = document.getElementById('analysis-content');
-            const dateSpan = document.getElementById('analysis-date');
-            
+            const contentDiv  = document.getElementById('analysis-content');
+            const dateSpan    = document.getElementById('analysis-date');
+
             dateSpan.innerText = new Date().toLocaleString('tr-TR');
-            
+
             let correct = 0, wrong = 0;
-            let total = allQuestions.length;
+            let total    = allQuestions.length;
             let answered = Object.keys(userAnswers).length;
 
             Object.keys(userAnswers).forEach(id => {
@@ -531,9 +917,9 @@
 
             try {
                 const canvas = await html2canvas(analysisDiv);
-                const link = document.createElement('a');
+                const link   = document.createElement('a');
                 link.download = `Yusuf_Mirsad_Analiz.jpg`;
-                link.href = canvas.toDataURL("image/jpeg", 0.9);
+                link.href     = canvas.toDataURL("image/jpeg", 0.9);
                 link.click();
                 setTimeout(() => alert("Lütfen kanıtınızı ayşe abla adlı kişiye gönderiniz"), 500);
             } catch (err) {
