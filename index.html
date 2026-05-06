@@ -13,10 +13,7 @@
             --fairy-green: #e8f5e9;
             --deep-purple: #7b1fa2;
             --accent-pink: #ff80ab;
-            --white-glass: rgba(255, 255, 255, 0.9);
         }
-
-        /* Arka Plan ve Genel Yapı */
         body {
             margin: 0;
             padding: 0;
@@ -24,132 +21,64 @@
             background: url('m.jpg') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
-            overflow-x: hidden;
         }
-
         .overlay {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
             min-height: 100vh;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: fadeIn 1.2s ease-out;
         }
-
-        /* Animasyonlar */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-
         .container {
             max-width: 800px;
             width: 100%;
-            background: var(--white-glass);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 40px;
             padding: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
             border: 4px solid var(--pudra-pink);
             position: relative;
             margin-top: 20px;
-            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-            transition: transform 0.3s ease;
         }
-
         h1 {
             font-family: 'Dancing Script', cursive;
             color: var(--deep-purple);
             text-align: center;
             font-size: 2.8rem;
             margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            animation: float 4s ease-in-out infinite;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
-
-        /* Navigasyon Sekmeleri */
         .nav-tabs {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-bottom: 30px;
         }
-
         .tab-btn {
             padding: 12px 30px;
             border: none;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.3s;
             background: var(--soft-purple);
             color: var(--deep-purple);
             font-size: 1rem;
-            position: relative;
-            overflow: hidden;
         }
-
-        .tab-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 3px;
-            background: var(--accent-pink);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        .tab-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
         .tab-btn.active {
             background: var(--accent-pink);
             color: white;
-            box-shadow: 0 8px 20px rgba(255, 128, 171, 0.4);
-            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 128, 171, 0.4);
         }
-
-        .tab-btn.active::after {
-            width: 100%;
-        }
-
-        /* Soru Kartı */
         .question-card {
             background: #fff;
             padding: 30px;
             border-radius: 25px;
             border: 1px solid var(--pudra-pink);
             box-shadow: inset 0 0 15px rgba(252, 228, 236, 0.5);
-            transition: all 0.5s ease;
         }
-
-        .question-card.fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
         .question-meta {
             color: var(--accent-pink);
             font-weight: bold;
@@ -159,20 +88,16 @@
             align-items: center;
             gap: 10px;
         }
-
         .question-text {
             font-size: 1.2rem;
             line-height: 1.8;
             color: #444;
             margin-bottom: 30px;
         }
-
-        /* Seçenekler */
         .options {
             display: grid;
             gap: 15px;
         }
-
         .option-btn {
             background: var(--fairy-green);
             border: 2px solid transparent;
@@ -180,27 +105,19 @@
             border-radius: 20px;
             text-align: left;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.3s;
             font-size: 1.1rem;
             color: #2e7d32;
-            position: relative;
         }
-
         .option-btn:hover {
             background: #c8e6c9;
-            transform: translateX(10px);
-            box-shadow: -5px 5px 15px rgba(0,0,0,0.05);
+            transform: translateX(5px);
         }
-
         .option-btn.selected {
             border-color: var(--accent-pink);
             background: #fce4ec;
             color: var(--deep-purple);
-            transform: scale(1.02) translateX(10px);
-            box-shadow: 0 5px 15px rgba(255, 128, 171, 0.2);
         }
-
-        /* Butonlar */
         .actions {
             display: flex;
             gap: 20px;
@@ -208,35 +125,22 @@
             margin-top: 40px;
             flex-wrap: wrap;
         }
-
         .btn {
             padding: 15px 40px;
             border: none;
             border-radius: 35px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
             font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
         .btn-solve { background: var(--deep-purple); color: white; }
         .btn-review { background: var(--pudra-pink); color: var(--deep-purple); }
         .btn-confirm { background: #4caf50; color: white; }
         .btn-proof { background: #ff5722; color: white; display: none; }
-
-        .btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        /* Geri Bildirim */
+        .btn:hover { transform: scale(1.05); opacity: 0.95; }
+        
         .feedback {
             margin-top: 30px;
             padding: 25px;
@@ -244,19 +148,10 @@
             display: none;
             line-height: 1.7;
             font-size: 1.1rem;
-            transform-origin: top;
-            animation: slideDown 0.4s ease-out;
         }
-
-        @keyframes slideDown {
-            from { transform: scaleY(0); opacity: 0; }
-            to { transform: scaleY(1); opacity: 1; }
-        }
-
-        .feedback.correct { background: #e8f5e9; border: 2px solid #4caf50; color: #2e7d32; box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2); }
-        .feedback.wrong { background: #ffebee; border: 2px solid #ef5350; color: #c62828; box-shadow: 0 5px 15px rgba(239, 83, 80, 0.2); }
-
-        /* Sayfalama */
+        .feedback.correct { background: #e8f5e9; border: 2px solid #4caf50; color: #2e7d32; }
+        .feedback.wrong { background: #ffebee; border: 2px solid #ef5350; color: #c62828; }
+        
         .pagination {
             display: flex;
             justify-content: space-between;
@@ -264,17 +159,13 @@
             margin-top: 40px;
             width: 100%;
             max-width: 800px;
-            animation: fadeIn 1.5s ease-out;
         }
-
         .page-info { 
             color: var(--deep-purple); 
             font-weight: 600; 
             background: white;
-            padding: 10px 25px;
+            padding: 10px 20px;
             border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
         }
 
         #analysis-capture {
@@ -288,7 +179,6 @@
             border-radius: 20px;
             font-family: 'Quicksand', sans-serif;
         }
-
         .analysis-header {
             text-align: center;
             color: var(--deep-purple);
@@ -296,20 +186,18 @@
             padding-bottom: 20px;
             margin-bottom: 20px;
         }
-
         .analysis-stat {
             display: flex;
             justify-content: space-between;
             margin-bottom: 10px;
             font-size: 1.2rem;
         }
-
+        
         @media (max-width: 600px) {
             .container { padding: 25px; border-radius: 30px; }
             h1 { font-size: 2rem; }
             .btn { padding: 12px 25px; font-size: 1rem; }
             .question-text { font-size: 1.1rem; }
-            .pagination { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
@@ -366,205 +254,252 @@
     {
         "id": 3,
         "type": "Paragraf",
-        "text": "3. Konuşmalarda belki de en önemli noktalardan biri, görünüştür. Görünüşünüzün nasıl olması gerektiğiyle ilgili kaygılarınız varsa önce şu iki soruya odaklanın: 'Görünüşüm iletmek istediğim mesaja uygun mu?' ve 'Kıyafetlerim içinde kendimi rahat hissediyor muyum?'. Mesela dinleyicilerinize 'Sizin gibi biriyim.' mesajını vermek istiyorsanız onlar gibi giyinmelisiniz. Şık bir restorandaki iş yemeğindeyseniz ona uygun bir kıyafet seçmelisiniz. Konuşmacının kıyafeti; yaşına, bedenine ve mevsime uygun olmalıdır. Ayrıca kıyafetin temiz ve ütülü olması, konuşmacının dinleyicilerine duyduğu saygının da bir göstergesidir.<br><br><b>Bu parçada aşağıdakilerin hangisinden söz edilmektedir?</b>",
-        "options": ["Konuşmacının giyim kuşamının öneminden", "Görünüşün öz güven üzerindeki etkisinden", "Dinleyici kitlesinin beklentilerinden", "Konuşma ortamının özelliklerinden", "Kıyafet seçiminde dikkat edileceklerden"],
-        "answer": 0,
-        "explanation": "Cevap A şıkkıdır. Parçada konuşmacının görünüşünün ve kıyafetinin iletmek istediği mesajla uyumlu olması gerektiği üzerinde durulmaktadır."
+        "text": "3. Konuşmalarda belki de en önemli noktalardan biri, görünüştür. Görünüşünüzün nasıl olması gerektiğiyle ilgili kaygılarınız varsa önce şu iki soruya odaklanın: 'Görünüşüm iletmek istediğim mesaja uygun mu?' ve 'Kıyafetimde, dinleyicilerin mesajıma odaklanma konusunda dikkatlerini dağıtacak herhangi bir şey var mı?' Örneğin büyük bir vakıf kurmaya çalışan bir iş insanıysanız, pahalı ve klasik bir takım elbiseyle (tercihen lacivert) paraya ihtiyacı olmayan ve başarılı bir kişi izlenimi bırakabilirsiniz. Ancak kendi markasının sıra dışı yaratıcılığını aktarmayı deneyen bir sanatçıysanız, o zaman mavi bir takım elbise, sizin için en korkunç tercih olur. Giydiğiniz şey, sözleriniz kadar kim olduğunuzla ilgili de mesaj verir.<br><br><b>Bu parçadaki anahtar kavram aşağıdakilerden hangisidir?</b>",
+        "options": ["Marka", "Konuşma", "Görünüş", "Samimiyet", "Tarz"],
+        "answer": 2,
+        "explanation": "Cevap C şıkkıdır. Metnin tamamında görünüşün (kıyafet vb.) verilen mesaj üzerindeki etkisi ve önemi vurgulanmaktadır."
     },
     {
         "id": 4,
         "type": "Paragraf",
-        "text": "4. Kitaplar, insanlığın ortak mirasıdır ve her biri farklı bir dünyanın kapısını aralar. Okumak, sadece bilgi edinmek değil, aynı zamanda empati kurma yeteneğini geliştirmektir. Bir romanın sayfaları arasında kaybolurken, hiç tanımadığımız insanların acılarını, sevinçlerini ve hayallerini paylaşırız. Bu süreç, bireyin iç dünyasını zenginleştirir ve olaylara farklı açılardan bakmasını sağlar. Dolayısıyla kitap okuma alışkanlığı, toplumsal huzurun ve anlayışın temel taşlarından biridir.<br><br><b>Bu parçada kitap okumanın hangi yönü vurgulanmaktadır?</b>",
-        "options": ["Bilgi düzeyini artırması", "Hayal gücünü geliştirmesi", "Bireysel ve toplumsal katkıları", "Zamanı verimli kullanma yolu olması", "Dil becerilerini iyileştirmesi"],
+        "text": "4. Her terk ediş bir charesizliktir ancak bir anlamda da fırsatı değerlendirme isteğidir. Kadınların, binlerce yıllık şartlanmanın, tarım toplumuna geçtikten sonra evde kalmalarının, mülkiyetin erkek elinde toplanmasının sonucunda erkeklere göre daha zayıf konumda olduğunu göz önünde tutarsak terk etme kararını erkeklere göre daha zor verdiği bir gerçek. Mücadele edecek kararlılığı ve ekonomik gücü olan her kadının umudunu yitirdiğinde terk edebileceğine inanın. Kadınlar açısından terk etme eyleminin bir başka boyutu daha var tabii ki: Çocuk. Kadın çocuk sahibiyse onu düzene mahkûm eden zincirler ikileşir.<br><br><b>Bu parçada üzerinde durulan aşağıdakilerden hangisidir?</b>",
+        "options": ["Kadınların çektiği acılar", "Terk etmenin zararlı yönleri", "Kadınların terk etmedeki zorlukları", "Erkek egemen toplumun zararları", "Çocuğun, kadınların yaşamındaki yeri"],
         "answer": 2,
-        "explanation": "Cevap C şıkkıdır. Metinde kitap okumanın hem bireyin iç dünyasını zenginleştirdiği (bireysel) hem de toplumsal huzura katkı sağladığı (toplumsal) belirtilmektedir."
+        "explanation": "Cevap C şıkkıdır. Metinde kadınların toplumsal ve biyolojik (çocuk) nedenlerle terk etme kararını vermekte yaşadığı zorluklar ele alınmaktadır."
     },
     {
         "id": 5,
-        "type": "Matematik",
-        "text": "5. Bir sayının 3 katının 5 fazlası, aynı sayının 4 katının 2 eksiğine eşittir.<br><br><b>Buna göre bu sayı kaçtır?</b>",
-        "options": ["5", "6", "7", "8", "9"],
-        "answer": 2,
-        "explanation": "Cevap 7'dir. Denklem: 3x + 5 = 4x - 2. Buradan x = 7 bulunur."
+        "type": "Paragraf",
+        "text": "5. Türkler, kendilerini yeryüzünde hak ve adaleti korumakla görevlendirilmiş olarak görüyordu. Asya Hun İmparatorluğu Hükümdarı Mete Han, o nedenle Çin imparatoruna gönderdiği mektupta, kendisinin Tanrı tarafından tahta çıkarıldığını ifade ediyor, askerî başarılarının buna dayandığını öne sürüyordu. Savaşlarda Gök Tanrı'nın kendilerini koruduklarına inanan Türkler, bu uğurda ölmeleri hâlinde Tanrı'nın kendilerini cennetine koyacaklarına inanıyorlardı. Türk hükümdarları bu inanca dayalı olarak kendilerini yeryüzünün temsilcileri olarak görüp Tanrı adına hüküm verdiklerini ileri sürdükleri için buyrukları Tanrı buyruğu gibiydi. Bu buyruklara uymayanları Tanrı'nın cezalandıracağı belirtiliyordu.<br><br><b>Bu parçada üzerinde durulan aşağıdakilerden hangisidir?</b>",
+        "options": ["Türklerde inanç ve yönetim arasındaki ilişki", "Hükümdarların adalet dağıtma amacı", "Devlet yöneticilerinin inanma süreçleri", "Tek tanrılı dinlerin doğuşu", "Türklerin inanç sistemleri"],
+        "answer": 1,
+        "explanation": "Cevap B şıkkıdır. Parçada Türklerin inançlarının yönetim anlayışı ve hükümdarların meşruiyeti üzerindeki etkisi anlatılmaktadır."
     },
     {
         "id": 6,
-        "type": "Matematik",
-        "text": "6. Bir sınıftaki öğrencilerin %60'ı erkektir. Sınıfta 12 kız öğrenci olduğuna göre, sınıf mevcudu kaçtır?</b>",
-        "options": ["20", "25", "30", "35", "40"],
+        "type": "Paragraf",
+        "text": "6. Günümüz şartlarında siyaset ve edebiyat kelimelerini bir arada anmak zor olsa da tarih boyunca edebiyatın siyasetle haşır neşirliği var olagelmiştir. Şair yahut yazar, nihayette içinde yaşadığı toplumun bir parçası olarak karşımıza çıkan sosyal bir varlıktır. Eserini yazma sürecinde çoğu zaman toplumsal yapıdan uzaklaşmaya çalışsa da her edebiyatçı, toplum içerisinde varlığını sürdürmek zorundadır ve bu zorunluluk zaman zaman edebiyatla siyasetin aynı karede buluşmasına yol açar. Bu buluşma, çoğu zaman hamilik/mesenlik kavramı etrafında şekillenir ki -istisnaları olmakla birlikte- çağlar boyunca gerek Doğu'da gerek Batı'da edebiyatçıların ya edebiyatın propaganda gücünden faydalanarak siyasal iktidarı çeşitli şekillerde destekledikleri yahut da tam tersi istikamette siyasal iktidarı eleştirip muhalefet yaptıkları görülmüştür.<br><br><b>Bu parçada aşağıdakilerin hangisi üzerinde durulmuştur?</b>",
+        "options": ["Edebiyat - siyaset ilişkisi", "Sanatçı - toplum ilişkisi", "Sanat - gerçek ilişkisi", "Sanat - çıkar ilişkisi", "Edebiyat - kültür ilişkisi"],
         "answer": 2,
-        "explanation": "Cevap 30'dur. %40'ı kız ise, 0.40 * x = 12 denkleminden x = 30 bulunur."
+        "explanation": "Cevap C şıkkıdır. Metinde edebiyatçıların toplumsal bir varlık olmalarından dolayı siyasetle olan kaçınılmaz ilişkileri ve bu ilişkinin farklı biçimleri ele alınmaktadır."
     },
     {
         "id": 7,
-        "type": "Matematik",
-        "text": "7. Hangi sayının 2 katının 10 fazlası, kendisinin 3 katına eşittir?</b>",
-        "options": ["5", "10", "15", "20", "25"],
-        "answer": 1,
-        "explanation": "Cevap 10'dur. 2x + 10 = 3x denkleminden x = 10 bulunur."
+        "type": "Paragraf",
+        "text": "7. Michel Butor Roman Üstüne Denemeler adlı kitabında anlatının laboratuvarı olan romanın en yetkin varlık bilimsel alan olduğunu ve gerçeğin bize nasıl göründüğünü inceleyeceğimiz en yetkin yer olduğunu söyler. Hele de edebiyat ve felsefe bilimleri yan yana sıralandığında varoluşçu romancıların bu türlerin başarılı temsilcileri olduğu söylenebilir. Jean Paul Sartre'ın, Simone de Beauvoir'ın, Albert Camus'nün hem filozof hem de romancı yanlarını unutmamak gerekir. Sadece adlarını burada saydığımız isimlerin haricinde varoluşçuluğun asıl temsilciliğini yapmış Gabriel Marcel'den Dostoyevski'ye kadar aktif ve gerçek egzistansiyalistler, biraz daha önceye gidecek olursak Soren Aabye Kierkegaard'dan Martin Heidegger'e hatta Jaspers'e ve Marly Panty'ye kadar hemen hemen tüm filozoflar da tezlerini, hipotezlerini, ilkelerini ve savlarını hem kuramsal felsefi metinlerle hem de onları edebî metinler içinde eriterek vermeyi gerekli görmüşlerdir.<br><br><b>Bu parçada üzerinde durulan aşağıdakilerden hangisidir?</b>",
+        "options": ["Edebiyat ile felsefe arasındaki ilişki", "Edebiyatın felsefeye kattığı güç", "Edebî metinlerin felsefecilere etkisi", "Felsefenin edebiyata kattığı güç", "Felsefi metinlerin edebiyatçılara etkisi"],
+        "answer": 3,
+        "explanation": "Cevap D şıkkıdır. Parçada birçok filozofun ve yazarın felsefi düşüncelerini edebî metinler aracılığıyla dile getirdiği vurgulanmaktadır."
     },
     {
         "id": 8,
-        "type": "Matematik",
-        "text": "8. Bir dikdörtgenin uzun kenarı kısa kenarının 2 katıdır. Çevresi 30 cm olduğuna göre, uzun kenarı kaç cm'dir?</b>",
-        "options": ["5", "10", "15", "20", "25"],
+        "type": "Paragraf",
+        "text": "8. Şehir kavramıyla aramızdaki derin ilişkinin temelinde, insan olarak türümüzü devam ettirme güdümüz ve yeryüzünden silinme korkumuz yatıyor. Bu yüzden de bir şehri yıkıp yok etme girişimi, toplu hâlde insan türüne yönelmiş bir tehdit etkisi yaratıyor. Üstelik bu tehdidin birebir savaşarak değil de kundakçılıkla ortaya çıkması, Hiroşima'ya atılmış atom bombası gibi travmatik bir gedik açıyor insan ruhunda. Bir şehri ve o şehirle beraber insan türünün devamlılığına ilişkin çabamızı ve umudumuzu da gözü dönük bir şekilde yok edenin ya da yakıp küle çevirenin yine kendi türümüzden çıkmasıysa travmayı iyice atlatılmaz hâle sokuyor.<br><br><b>Bu parçanın konusu aşağıdakilerden hangisidir?</b>",
+        "options": ["Şehir yaşamı", "İnsan doğasının gücü", "Şehirleri yakarak yok etme", "Yaşamı sürdürebilme içgüdüsü", "İnsan türünü devam ettirme isteği"],
+        "answer": 4,
+        "explanation": "Cevap E şıkkıdır. Metinde şehirlerin yok edilmesinin insan türünün devamlılığına bir tehdit olarak algılandığı ve bunun yarattığı travmatik etki anlatılmaktadır."
+    },
+    {
+        "id": 9,
+        "type": "Paragraf",
+        "text": "9. Sömürgecilik tarihi; güçlü olanın, güçsüz olan üzerindeki hâkimiyetini meşrulaştıran bir söylemden ibarettir. Modern dünyada ve öncesinde güç sahibi insanlar, toplumda daha imtiyazlı olmuş ve demokratik toplumun Avrupa kıtasında kendini göstermesinden itibaren sonradan iktidarın belirleyici öznesi durumuna gelmiştir. Özellikle Rönesans Dönemi Avrupa'sı sosyal ve siyasi gücün imtiyazlı sınıfın elinde iktidarı nasıl şekillendirebileceğini bize göstermiştir. İktidar ise hiç şüphesiz kaynağını ve gücünü kendini meşrulaştıran söylemden alır. Her bir söylem, bir bilgi üretiminin sonucudur. Bacon, Hobbes, Montesquieu ve son dönem aydınlarından Foucault'nun sıklıkla vurguladığı gibi bilgi, iktidarı belirleyen en önemli güçtür. Avrupa'da erken modern dönemden itibaren kendini gösteren imtiyazlı sınıf aslında bilgiyi üreten ve söylemleri ile sömürgeciliğin temelini atan güç olmuştur. Bu imtiyazlı sınıf kapitali, yani modern dünyanın yeni kutsalı olan 'sermaye' ve 'parayı' yöneten ve bilgiyi de sermayelerini guvence altına almak için kullanan Avrupalılardır.<br><br><b>Aşağıdakilerden hangisi bu parçaya başlık olabilir?</b>",
+        "options": ["Bilgili Olmanın Önemi", "Güç ve Bilgi İlişkisi", "Avrupa'nın Sömürge Tarihi", "Sömürgeciliğin Yayılma Alanları", "Düşünürlerin Ezenlere Karşı Mücadeleleri"],
+        "answer": 0,
+        "explanation": "Cevap A şıkkıdır. Metinde bilginin iktidar ve sömürgecilik üzerindeki belirleyici gücü anlatılmaktadır."
+    },
+    {
+        "id": 10,
+        "type": "Paragraf",
+        "text": "10. İnsan, ne olduğunu, kim olduğunu ararken insanın başvuracağı en yakın eylemlerden birisi de sanırım yazıya tutunmaktır. Yani okumak ve yazmak. Okumak ve yazmak düşünmeyi de öğretiyor. Ben de hem okurken hem de yazmaya başlarken kendime yakın olduğumun farkına vardım sanırım. Bazı soruların cevabı kendini anlamaktan, kendini anlamaksa insana dair ne varsa onları anlamaktan geçiyor. Okumakla insanın kat kat örttüğü yaralarını görebilmek mümkün. Ama okumakla bu yaraları sadece görebiliyorsunuz. Yazı, o ince ucuyla yaraları deşiyor. Yazının ince ucuyla dokunduğunuz, önce kendi yaralarınız oluyor. Bu sayede bize benzeyenlerin yaralarını da fark ediyoruz. Okumanın yanına yazmayı eklemem sanırım bununla alakalı. Yazıya içten bir yaklaşım gösterildiğinde yazı, yazarını da terbiye ediyor. Yani aslında yazdıklarımıza öncelikle kendimizin ihtiyacı var diyebiliriz.<br><br><b>Bu parçanın konusu aşağıdakilerden hangisidir?</b>",
+        "options": ["Nitelikli okur olmanın yolları", "Yazma ile okuma arasındaki çelişki", "Okuma ve yazmanın oluşum süreçleri", "Gerçek yazarların okuma eylemleri", "Okuma yazmanın yararları ve amacı"],
+        "answer": 3,
+        "explanation": "Cevap D şıkkıdır. Metinde okuma ve yazma eylemlerinin insanın kendini tanıması üzerindeki etkileri anlatılmaktadır."
+    },
+    {
+        "id": 11,
+        "type": "Paragraf",
+        "text": "11. Yetişkin bir adam, başka bir yetişkin adama vurduğunda araya giriyoruz. Ama yetişkin biri çocuğa vurduğunda sessiz kalıyoruz. Halbuki kırılgan olan, kalıcı yaralar almaya açık olan, yetişkin değil, çocuk. Bir adam başka bir adama vurduğunda, dayak yiyen kişi öylece dursa, kendisini korumaya yeltenmese ve bile isteye dayak yemeyi beklese bunu yadırgarız, değil mi? Ama çocuğun avucunu açıp öğretmeninin cetveline uzatmasını, sonra diğer avucunu açmasını yadırgamıyoruz. Çocukken benzeri bir sahneye şahit olan ve bu sahnedeki tuhaflığı görmeyen her insan, mutsuz bir çocukluk geçirmiştir. Çünkü bunu görmek ve olağan kabul etmek istismardır. Bunların normal olduğu bir dünyada doğup büyümek, size kimse bunların yanlış olduğunu göstermediği, söylemediği sürece istismardır. Burada cetvel yerine kötü bakma, azarlama, eleştirme gibi şeyleri de koyabiliriz.<br><br><b>Bu parçanın konusu aşağıdakilerden hangisidir?</b>",
+        "options": ["Öz güven eksikliği", "Eğitim sistemindeki yanlışlıklar", "Yanlış davranışlar", "Çocukların şiddetle tanışmaları", "Çocuk istismarı"],
+        "answer": 2,
+        "explanation": "Cevap C şıkkıdır. Metinde çocuklara uygulanan şiddetin toplum tarafından normalleştirilmesi anlatılmaktadır."
+    },
+    {
+        "id": 12,
+        "type": "Paragraf",
+        "text": "12. Günümüzde çeviri üzerine yazmaya ve konuşmaya niyetlenen, öncelikle bir dizi belaya bulaşma riskini göze almış demektir. Çeşitli dillerden yapılan çevirilerin çapını hayal edebilmek için sadece edebiyat odaklı belli başlı yayınevlerine bakmak bile yeterli olur. Her biri kendi başına düşünce okulu diyebileceğimiz ve varlıklarını büyük eserlerin çevirisine adamış yayıncılar farkına varmadan çeviriye ve sorunlarına yeni açılımlar getirecek bir külliyat oluşturmuş durumda. Her şeyden önce bunun en temel sebebi, bir dilden başka bir dile aktarma, kaynak dildeki metni hedef dilde özgünlüğüyle var kılma sürecinde karşı karşıya kalınan sorunların büyüklüğüdür. Şunu belirtmek gerekir ki mezkûr riskler her dönem olageldi çünkü çeviri âdeta bir yeniden yazımdır, hele edebiyat çevirisi ise çevirenin beğenileri, bilgisi, dili, kelime tercihi, orijinal eserdeki kelimelerin kullanım alanına hâkimiyeti, üslubu mutlaka esere yansır.<br><br><b>Bu parçada üzerinde durulan aşağıdakilerden hangisidir?</b>",
+        "options": ["Çeviri metinler", "Çevirinin tarihçesi", "Çevirinin zorlukları", "Yayınevlerinin çeviriye zararları", "Yazarların çeviriden uzak duruşları"],
+        "answer": 2,
+        "explanation": "Cevap C şıkkıdır. Metinde çeviri sürecinin zorlukları ve çevirmenin esere olan etkisi anlatılmaktadır."
+    },
+    {
+        "id": 13,
+        "type": "Paragraf",
+        "text": "13. Gözlerimizle bağlantısı olan beynin çok önemli bir parçasıdır pineal bez. Gece gündüz gibi ritmik ışık değişimlerini vücuttaki her organa iletmek ve akşam 21.00'den sonra salgılanmaya başlayan melatonin hormonunu üretmek gibi görevleri vardır. Ancak pineal bezin tüm bunlar dışında başka özellikleri de var. Yapılan kontrollü deneylerde pineal bezin aktive edilmesinin bazı halüsinasyonlara yol açtığı ortaya konulmuş. Bu halüsinasyonların birbirine benzemesi, olayı daha da ilginç hâle getiriyor. Bu nedenle pineal bezin üçüncü gözümüz olduğuna dair görüşler var. Bu, paranormal olayları da açıklayabilir ancak şimdilik bunlar birer tezden ibaret.<br><br><b>Bu parçanın konusu aşağıdakilerden hangisidir?</b>",
+        "options": ["Pineal bezin işlevleri", "Beynin çalışma sistemi", "Halüsinasyonların çalışma şekilleri", "Beyin üzerine araştırmaların yetersizliği", "Pineal bezin göz ve beyine katkıları"],
         "answer": 1,
-        "explanation": "Cevap 10'dur. Kısa kenar x, uzun kenar 2x olsun. 2(x + 2x) = 30 => 6x = 30 => x = 5. Uzun kenar 2x = 10 olur."
+        "explanation": "Cevap B şıkkıdır. Metinde pineal bezin temel biyolojik görevleri ve üzerine yapılan araştırmalar anlatılmaktadır."
+    },
+    {
+        "id": 14,
+        "type": "Paragraf",
+        "text": "14. 19. yüzyıl boyunca sayısız Osmanlı talebesi Paris'e gönderiliyor. Bunca insanın arasında Paris'te saygın bir konum elde edenlerin sayısı ise oldukça yüksektir. Halil Şerif, Şinasi, Ahmet Rıza gibi isimler daha oradayken yaptıklarıyla Fransız basınında haber olabiliyorlar ama Paris'in hiç görmediği, yok farz ettiği birçok isim de var. Aslında Osmanlı aydınlarının Paris sevdasının platonik bir aşk olduğunu da söylemek gerekli. Şu anda bir kafedeki masada duran Yahya Kemal plaketinden başka Paris'te Osmanlılardan kalan birçok iz bulursunuz. Hoca Tahsin Efendi ve Hoca Kadri Efendi de pek üzerinde durulmayan iki karakter. Medrese kökenli Tahsin Efendi Paris'teki Osmanlı Mektebi'nin hocalarından. Nükteli şiirler yazan ve fen bilimlerine düşkün bir bohem. Hoca Kadri ise Yahya Kemal'in tanıklığına göre yıkanmadığı için pek kötü kokan, bütün günü Paris kafelerinde tek bir kahve içerek geçiren ve partisiz parlamento kuramını geliştiren bir fikir adamı.<br><br><b>Bu parçada üzerinde durulan aşağıdakilerden hangisidir?</b>",
+        "options": ["Batılı kültürünün Türk kültürü üzerindeki etkisi", "Osmanlı aydınlarının Batılı yaşam tarzına verdikleri değer", "Türk aydınlarının kültürel gelişime verdikleri önem", "Osmanlı Dönemi'nden itibaren Paris'e olan ilgi", "Paris'e yerleşen Osmanlı aydınlarının sayıca azlığı"],
+        "answer": 3,
+        "explanation": "Cevap D şıkkıdır. Metinde Osmanlı aydınlarının Paris'e olan ilgisi ele alınmaktadır."
+    },
+    {
+        "id": 15,
+        "type": "Paragraf",
+        "text": "15. Sonra kitapları Mısır'ın papirüslerine yazmaya başladık. Papirüsleri ezip uzun rulolar yapıyor ve yazma işi bitince dürüp kaldırıyorduk. Kütüphanelerde raflara veya kovalara sokuveriyorduk. Kil tabletin hiç şansı kalmamıştı. Papirüsten veya tabaklanmış koyun veya sığır derisi parşömenlerden rulolar yaptık. Bunlara bazen sürekli, rulonun bir ucundan bir ucuna yazdık. Bazen sayfa sayfa yazıp yan yana yapıştırdık ve yine rulo yaptık. Tarihî filmlerde ferman okuyucunun rulonun bir ucunu yukarıda, diğerini aşağıda tutup okuduğu sahneleri hatırlarım. Düşey okunanları kadar yatay okunanları da vardı. Bazıları öylece rulodan ibaretti. Bazılarının iki ucunda ahşap tutamaklar olurdu. Fakat kıvrılıp durdukları için, eh rulonun görevi kıvrılıp durmaktır zaten, çoğaltılırken iki kişi lazımmış. Biri okuyacak, diğeri yazacak.<br><br><b>Bu parçaya başlık olarak aşağıdakilerden hangisi verilebilir?</b>",
+        "options": ["Yazma Kitapların Önemi", "Papirüsten Ruloların Kimi Özellikleri", "Rulo Yazmaların Okunmasındaki Sıkıntılar", "Rulo Yazmaların Saklanmasındaki Güçlükler", "Tabletten Papirüse Geçişte Yaşanan Güzellikler"],
+        "answer": 1,
+        "explanation": "Cevap B şıkkıdır. Metinde papirüs ve parşömen ruloların özellikleri anlatılmaktadır."
+    },
+    {
+        "id": 16,
+        "type": "Paragraf",
+        "text": "16. Doksanlı yılların sonları olmalı. Bir iş hanındaki büromda kedi besliyordum. Bir tane ile kalmıyor malumunuz, artıyorlar. Yedi tane olmuşlardı. Herhangi bir sorunları yoktu. Sesleri bile çıkmıyordu. Ama dirlik düzen gereği bir gün yönetici çaldı kapıyı. Odaya geçtik oturuyoruz. Bir tuhaflık oldu. Önce anne geldi oturdu kucağıma, sonra yavrular derken yedisi de sardı çevremi. Yöneticimiz de bu ara lafa girecek ama havadan sudan konuşmaya devam ediyor. Nihayet konuya girdiğinde 'Kedilerden rahatsızız. Ev değil iş hanı burası. Hoş olmuyor.' diye aldı sazı eline. Sonra bir an durakladı ve fark ettiği şeyi söyledi: 'Yahu bunlar anlıyor mu? Hepsi gözünü dikmiş bana bakıyor. Seni koruyorlarmış gibi. Kötü bir şey desem saldıracaklarmış gibi.' Dirlik düzen amacındaki yönetici korkmuştu kedilerimin gözlerini dikip ona bakmasından. En son ne zaman bir hayvanın gözlerinin içine bakmıştı kim bilir? Sahi siz en son ne zaman baktınız?<br><br><b>Aşağıdakilerden hangisi bu parçaya başlık olarak verilebilir?</b>",
+        "options": ["Kent Hayatı", "Hayvan Hakları", "Komşuluk İlişkileri", "Kedilerin Özellikleri", "Hayvan Sevgisi"],
+        "answer": 4,
+        "explanation": "Cevap E şıkkıdır. Metinde hayvan sevgisi ve empati vurgulanmaktadır."
     }
 ];
 
-        let currentFilter = 'all';
+        let currentQuestions = [...allQuestions];
         let currentIndex = 0;
+        let selectedOption = null;
         let userAnswers = {};
-        let filteredQuestions = [];
 
         function filterType(type) {
-            currentFilter = type;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + type).classList.add('active');
+            
+            const quizArea = document.getElementById('quiz-area');
+            const pagination = document.querySelector('.pagination');
+            
+            if (type === 'matematik') {
+                quizArea.innerHTML = '<div class="question-card" style="text-align:center; padding: 50px;"><h2>Çok yakında...</h2></div>';
+                pagination.style.display = 'none';
+                return;
+            } else {
+                pagination.style.display = 'flex';
+            }
+            
+            if (type === 'all') {
+                currentQuestions = [...allQuestions];
+            } else {
+                currentQuestions = allQuestions.filter(q => q.type.toLowerCase() === type);
+            }
             currentIndex = 0;
-            
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`tab-${type}`).classList.add('active');
-
-            filteredQuestions = type === 'all' 
-                ? allQuestions 
-                : allQuestions.filter(q => q.type.toLowerCase() === type);
-            
-            renderQuestion();
+            if(currentQuestions.length > 0) {
+                loadQuestion();
+            } else {
+                quizArea.innerHTML = '<div class="question-card" style="text-align:center; padding: 50px;"><h2>Soru bulunamadı 🌸</h2></div>';
+            }
         }
 
-        function renderQuestion() {
-            const quizArea = document.getElementById('quiz-area');
-            const q = filteredQuestions[currentIndex];
+        function loadQuestion() {
+            const q = currentQuestions[currentIndex];
+            selectedOption = userAnswers[q.id] !== undefined ? userAnswers[q.id] : null;
             
-            if (!q) {
-                quizArea.innerHTML = "<h2>Soru bulunamadı.</h2>";
-                return;
-            }
-
-            const isSolved = userAnswers[q.id] !== undefined;
-
+            const quizArea = document.getElementById('quiz-area');
             quizArea.innerHTML = `
-                <div class="question-card fade-in">
-                    <div class="question-meta">
-                        <span>📍 ${q.type}</span>
-                        <span>•</span>
-                        <span>Soru ${currentIndex + 1}</span>
-                    </div>
+                <div class="question-card">
+                    <div class="question-meta">🌸 ${q.type} - Soru #${q.id}</div>
                     <div class="question-text">${q.text}</div>
                     <div class="options">
                         ${q.options.map((opt, i) => `
-                            <button class="option-btn ${userAnswers[q.id] === i ? 'selected' : ''}" 
-                                    onclick="selectOption(${i})"
-                                    ${isSolved ? 'disabled' : ''}>
-                                ${String.fromCharCode(65 + i)}) ${opt}
-                            </button>
+                            <button class="option-btn ${selectedOption === i ? 'selected' : ''}" id="opt-${i}" onclick="selectOpt(${i})"><b>${String.fromCharCode(65 + i)}</b> - ${opt}</button>
                         `).join('')}
                     </div>
-                    
-                    <div class="actions">
-                        ${!isSolved ? `
-                            <button class="btn btn-solve" onclick="checkAnswer()">Cevabı Onayla</button>
+                    <div class="actions" id="action-buttons">
+                        ${userAnswers[q.id] !== undefined ? `
+                            <button class="btn btn-review" onclick="review()">Tekrar İncele 🦋</button>
+                            <button class="btn btn-solve" onclick="solve()">Çözdüm 🌿</button>
                         ` : `
-                            <button class="btn btn-review" onclick="toggleExplanation()">Çözümü Göster/Gizle</button>
+                            <button class="btn btn-confirm" id="btn-confirm" onclick="confirmSelection()">Onayla ✔️</button>
                         `}
-                        <button class="btn btn-confirm" id="finish-btn" onclick="finishQuiz()">Çalışmayı Bitir</button>
-                        <button class="btn btn-proof" id="proof-btn" onclick="generateProof()">Kanıt Oluştur 📸</button>
+                        <button class="btn btn-proof" id="btn-proof" onclick="generateProof()" style="background:#ff5722; color:white; display:none;">Kanıt Çıkar 📸</button>
                     </div>
-
                     <div id="feedback" class="feedback"></div>
                 </div>
             `;
-
-            updatePagination();
-            if (isSolved) {
-                showFeedback(userAnswers[q.id] === q.answer, q.explanation, false);
+            
+            if (userAnswers[q.id] !== undefined) {
+                document.querySelectorAll('.option-btn').forEach(b => {
+                    b.onclick = null;
+                    b.style.cursor = 'default';
+                });
             }
+
+            document.getElementById('pageInfo').innerText = `Soru ${currentIndex + 1} / ${currentQuestions.length}`;
+            document.getElementById('prevBtn').style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+            document.getElementById('nextBtn').style.visibility = currentIndex === currentQuestions.length - 1 ? 'hidden' : 'visible';
+            
+            checkProofButton();
         }
 
-        function selectOption(index) {
-            if (userAnswers[filteredQuestions[currentIndex].id] !== undefined) return;
-            
-            const btns = document.querySelectorAll('.option-btn');
-            btns.forEach(b => b.classList.remove('selected'));
-            btns[index].classList.add('selected');
-            
-            // Küçük bir seçim efekti
-            btns[index].style.transform = 'scale(1.05) translateX(15px)';
-            setTimeout(() => {
-                btns[index].style.transform = 'scale(1.02) translateX(10px)';
-            }, 200);
-
-            userAnswers[filteredQuestions[currentIndex].id] = index;
+        function selectOpt(i) {
+            selectedOption = i;
+            document.querySelectorAll('.option-btn').forEach((b, idx) => {
+                b.classList.toggle('selected', idx === i);
+            });
         }
 
-        function checkAnswer() {
-            const q = filteredQuestions[currentIndex];
-            const selected = userAnswers[q.id];
-            
-            if (selected === undefined) {
-                alert("Lütfen bir seçenek belirleyin!");
+        function confirmSelection() {
+            if (selectedOption === null) {
+                alert("Lütfen bir şık seç little lady ✨");
                 return;
             }
-
-            const isCorrect = selected === q.answer;
-            showFeedback(isCorrect, q.explanation, true);
-            renderQuestion();
-        }
-
-        function showFeedback(isCorrect, text, animate) {
-            const fb = document.getElementById('feedback');
-            if (!fb) return;
             
-            fb.style.display = 'block';
-            fb.className = `feedback ${isCorrect ? 'correct' : 'wrong'}`;
-            fb.innerHTML = `
-                <strong>${isCorrect ? '✨ Tebrikler! Doğru.' : '😔 Maalesef yanlış.'}</strong><br>
-                ${text}
+            const q = currentQuestions[currentIndex];
+            userAnswers[q.id] = selectedOption;
+
+            const actionButtons = document.getElementById('action-buttons');
+            actionButtons.innerHTML = `
+                <button class="btn btn-review" onclick="review()">Tekrar İncele 🦋</button>
+                <button class="btn btn-solve" onclick="solve()">Çözdüm 🌿</button>
+                <button class="btn btn-proof" id="btn-proof" onclick="generateProof()" style="background:#ff5722; color:white; display:none;">Kanıt Çıkar 📸</button>
             `;
-
-            if (animate) {
-                fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-        }
-
-        function toggleExplanation() {
-            const fb = document.getElementById('feedback');
-            fb.style.display = fb.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function changeQuestion(step) {
-            const newIndex = currentIndex + step;
-            if (newIndex >= 0 && newIndex < filteredQuestions.length) {
-                // Geçiş animasyonu için kartı önce hafifçe karartalım
-                const card = document.querySelector('.question-card');
-                card.style.opacity = '0';
-                card.style.transform = step > 0 ? 'translateX(20px)' : 'translateX(-20px)';
-                
-                setTimeout(() => {
-                    currentIndex = newIndex;
-                    renderQuestion();
-                }, 200);
-            }
-        }
-
-        function updatePagination() {
-            document.getElementById('pageInfo').innerText = `${currentIndex + 1} / ${filteredQuestions.length}`;
-            document.getElementById('prevBtn').disabled = currentIndex === 0;
-            document.getElementById('nextBtn').disabled = currentIndex === filteredQuestions.length - 1;
             
-            // Buton opaklıkları
-            document.getElementById('prevBtn').style.opacity = currentIndex === 0 ? '0.5' : '1';
-            document.getElementById('nextBtn').style.opacity = currentIndex === filteredQuestions.length - 1 ? '0.5' : '1';
+            document.querySelectorAll('.option-btn').forEach(b => {
+                b.onclick = null;
+                b.style.cursor = 'default';
+            });
+
+            checkProofButton();
         }
 
-        function finishQuiz() {
-            const answered = Object.keys(userAnswers).length;
-            if (answered < filteredQuestions.length) {
-                if (!confirm(`Henüz ${filteredQuestions.length} sorudan sadece ${answered} tanesini çözdün. Bitirmek istediğine emin misin?`)) return;
+        function review() {
+            alert("Sakin ol Mirsad, her şeyi başarabilirsin 🦋");
+        }
+
+        function solve() {
+            const q = currentQuestions[currentIndex];
+            const feedback = document.getElementById('feedback');
+            feedback.style.display = 'block';
+            
+            if (selectedOption === q.answer) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `<b>Harikasın Doğru Cevap ✨</b><br><p>${q.explanation}</p>`;
+            } else {
+                feedback.className = 'feedback wrong';
+                feedback.innerHTML = `<b>Canın sağ olsun, bir dahaki sefere 🌸</b><br>Doğru Şık: ${String.fromCharCode(65 + q.answer)}<br><p>${q.explanation}</p>`;
             }
-            document.getElementById('proof-btn').style.display = 'inline-block';
-            document.getElementById('finish-btn').style.display = 'none';
-            alert("Çalışma tamamlandı! 'Kanıt Oluştur' butonu ile raporunu alabilirsin.");
+        }
+
+        function changeQuestion(dir) {
+            currentIndex += dir;
+            loadQuestion();
+        }
+
+        function checkProofButton() {
+            const isLast = currentIndex === currentQuestions.length - 1;
+            const isAnswered = userAnswers[currentQuestions[currentIndex].id] !== undefined;
+            const proofBtn = document.getElementById('btn-proof');
+            if (proofBtn) {
+                proofBtn.style.display = (isLast && isAnswered) ? 'inline-block' : 'none';
+            }
         }
 
         async function generateProof() {
