@@ -176,7 +176,7 @@
 <body>
     <div class="overlay">
         <div class="container">
-            <h1>Yusuf Mirsad'ın Hazırlık Köşesi 🌿</h1>
+            <h1>🌿 Yusuf Mirsad'ın YKS Hazırlık sitesi 🌿</h1>
             
             <div class="nav-tabs">
                 <button class="tab-btn active" id="tab-all" onclick="filterType('all')">Hepsi</button>
@@ -248,12 +248,12 @@
         }
 
         function review() {
-            alert("Sakin ol Yusuf, her şeyi başarabilirsin! 🦋");
+            alert("Sakin ol Mirsad, her şeyi başarabilirsin 🦋");
         }
 
         function solve() {
             if (selectedOption === null) {
-                alert("Lütfen bir şık seç peri kızı! ✨");
+                alert("Lütfen bir şık seç little lady ✨");
                 return;
             }
             const q = currentQuestions[currentIndex];
@@ -262,10 +262,10 @@
             
             if (selectedOption === q.answer) {
                 feedback.className = 'feedback correct';
-                feedback.innerHTML = `<b>Harikasın! Doğru Cevap ✨</b><br><p>${q.explanation}</p>`;
+                feedback.innerHTML = `<b>Harikasın Doğru Cevap ✨</b><br><p>${q.explanation}</p>`;
             } else {
                 feedback.className = 'feedback wrong';
-                feedback.innerHTML = `<b>Olsun, bir dahaki sefere! 🌸</b><br>Doğru Şık: ${String.fromCharCode(65 + q.answer)}<br><p>${q.explanation}</p>`;
+                feedback.innerHTML = `<b>Olsun bir dahaki sefere 🌸</b><br>Doğru Şık: ${String.fromCharCode(65 + q.answer)}<br><p>${q.explanation}</p>`;
             }
         }
 
