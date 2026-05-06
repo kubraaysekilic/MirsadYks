@@ -179,9 +179,9 @@
             <h1>Yusuf Mirsad'ın Hazırlık Köşesi 🌿</h1>
             
             <div class="nav-tabs">
-                <button class="tab-btn active" id="tab-all" onclick="filterType('all')">Hepsi ✨</button>
-                <button class="tab-btn" id="tab-paragraf" onclick="filterType('paragraf')">Paragraf 📖</button>
-                <button class="tab-btn" id="tab-matematik" onclick="filterType('matematik')">Matematik 📐</button>
+                <button class="tab-btn active" id="tab-all" onclick="filterType('all')">Hepsi</button>
+                <button class="tab-btn" id="tab-paragraf" onclick="filterType('paragraf')">Paragraf</button>
+                <button class="tab-btn" id="tab-matematik" onclick="filterType('matematik')">Matematik</button>
             </div>
 
             <div id="quiz-area"></div>
@@ -262,10 +262,10 @@
             
             if (selectedOption === q.answer) {
                 feedback.className = 'feedback correct';
-                feedback.innerHTML = `<b>Harikasın! Doğru Cevap ✨ ✅</b><br><p>${q.explanation}</p>`;
+                feedback.innerHTML = `<b>Harikasın! Doğru Cevap ✨</b><br><p>${q.explanation}</p>`;
             } else {
                 feedback.className = 'feedback wrong';
-                feedback.innerHTML = `<b>Olsun, bir dahaki sefere! 🌸 ❌</b><br>Doğru Şık: ${String.fromCharCode(65 + q.answer)}<br><p>${q.explanation}</p>`;
+                feedback.innerHTML = `<b>Olsun, bir dahaki sefere! 🌸</b><br>Doğru Şık: ${String.fromCharCode(65 + q.answer)}<br><p>${q.explanation}</p>`;
             }
         }
 
